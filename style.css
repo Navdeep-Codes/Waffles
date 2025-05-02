@@ -139,4 +139,14 @@
       font-size: 0.9rem;
     }
   }
-  
+  .resources-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.resources-list li {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed rgba(var(--secondary-rgb), 0.2);
+}
