@@ -641,6 +641,7 @@ footer {
   padding: 2rem 1rem;
   color: var(--text-medium);
   position: relative;
+  width: auto;
   overflow: hidden;
   text-align: center;
   animation: slideInUp 0.8s ease-out;
