@@ -111,7 +111,7 @@ h1 {
 }
 
 h1::after {
-  content: "✨";
+  content: "🧇  ";
   position: absolute;
   top: -10px;
   right: -20px;
@@ -759,4 +759,83 @@ footer img:hover {
   .floating-waffle {
     display: none;
   }
+}
+/* Card Container */
+.javascript-spread {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #fff8f0;
+}
+
+/* Card Base Style */
+.card {
+  background-color: #fff7e6;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* Card Sizes */
+.card.small {
+  width: 250px;
+}
+
+.card.medium {
+  width: 350px;
+}
+
+.card.large {
+  width: 500px;
+}
+
+/* Inside Card */
+.card h3 {
+  margin-top: 0;
+  color: #cc6600;
+}
+
+.card ul {
+  padding-left: 1.5rem;
+  line-height: 1.5;
+}
+
+.card code {
+  background: #fff2d0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+/* Table inside card */
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.card th,
+.card td {
+  border: 1px solid #f4d9b2;
+  padding: 0.8rem;
+  text-align: left;
+}
+
+.card th {
+  background-color: #ffe6b3;
+}
+
+/* Notes box */
+.card.notes {
+  background-color: #fff1e0;
+  border-left: 5px solid #ff9800;
 }
