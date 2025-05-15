@@ -5,7 +5,7 @@
   <link rel="icon" type="image/x-icon" href="Assets/Logo.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Waffles | Gallery</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <a href="https://hackclub.com/"><img
@@ -23,7 +23,7 @@
     </nav>
     <br>
     <img src="Assets/Logo.jpg" alt="Waffle" />
-    <h1>🧇 Waffles Gallery 🧇</h1>
+    <h1><div id="app">Waffles</div></h1>
     <br>
     <p class="tagline">Browse our waffle creations!</p>
     <br>
@@ -46,4 +46,20 @@
   </footer>
 
 </body>
+<script>
+  
+  var app = document.getElementById('app');
+
+var typewriter = new Typewriter(app, {
+    loop: true
+});
+
+typewriter.typeString('Waffles')
+    .pauseFor(2500)
+    .deleteAll()
+    .typeString('Waffles')
+    .pauseFor(2500)
+    .deleteAll()
+    .start();
+  </script>
 </html>

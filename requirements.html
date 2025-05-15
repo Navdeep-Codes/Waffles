@@ -27,7 +27,7 @@
     </nav>
     <br>
     <img id="WafflesLogo" src="Assets/Logo.jpg" alt="Waffle" />
-    <h1>🧇 Waffles 🧇</h1>
+    <h1><div id="app">Waffles</div></h1>
     <br>
     <p class="tagline">YS: A Website with HTML, CSS and a little spread of JavaScript</p>
     <p class="tagline">WS: Get free waffles</p>
@@ -136,4 +136,20 @@
 </footer>
 
 </body>
+<script>
+  
+  var app = document.getElementById('app');
+
+var typewriter = new Typewriter(app, {
+    loop: true
+});
+
+typewriter.typeString('Waffles')
+    .pauseFor(2500)
+    .deleteAll()
+    .typeString('Waffles')
+    .pauseFor(2500)
+    .deleteAll()
+    .start();
+  </script>
 </html>
