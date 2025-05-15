@@ -6,7 +6,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Waffles | Gallery</title>
   <link rel="stylesheet" href="styles.css" />
-</head>
+<link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Grid for cards */
+    #submissions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    @media (max-width: 900px) {
+      #submissions { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      #submissions { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      padding: 2rem;
+      min-height: 24rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 1.125rem;
+    }
+    .card img {
+      width: 100%;
+      height: 10rem;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .card h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .card .links {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+    .card .links a {
+      text-decoration: underline;
+      color: #2563eb;
+    }
+    .status-filter-container {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .status-filter-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .status-filter-select {
+      background: #991b1b;
+      color: #fff;
+      border: 1px solid #b91c1c;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      width: 100%;
+      outline: none;
+      font-size: 1rem;
+    }
+    /* Footer styles remain unchanged */
+  </style>
+  </head>
 <body>
   <a href="https://hackclub.com/"><img
     style="position: absolute; top: 0; left: 10px; border: 0; width: 180px; z-index: 999;"
@@ -30,24 +100,98 @@
   </header>
 
   <main>
-    <section class="gallery-section">
-      <h2>Gallery</h2>
-      <p>Coming soon...</p> 
-    </section>
+    <div class="status-filter-container">
+      <div style="width: 12rem;">
+        <label for="status" class="status-filter-label">Status</label>
+        <select id="status" class="status-filter-select">
+          <option value="All">All</option>
+          <option value="Approved">Approved</option>
+          <option value="Pending">Pending</option>
+          <option value="Needs Changes">Needs Changes</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+    </div>
+    <div id="submissions">
+      <!-- Cards will be injected here -->
+    </div>
+    
   </main>
 
   <!-- Footer -->
   <footer>
-    <br>
-    <img src="https://swirl.hackclub.com/images/assets/other/stickers/orphmoji-yippee.png" alt="Orpheus Yippee!" style="background: none; width: 50px; margin-bottom: 2px; margin-right: 15px">
+    <img src="https://swirl.hackclub.com/images/assets/other/stickers/orphmoji-yippee.png" alt="Orpheus Yippee!" style="background: none; width: 50px; margin-bottom: 2px;">
     Made by Navdeep | Funded by Hack Club
-    <img src="https://swirl.hackclub.com/images/assets/other/stickers/orphmoji-yippee.png" alt="Orpheus Yippee!" style="background: none; width: 50px; margin-bottom: 2px; margin-left: 20px">
-    <br><br><br>
-  </footer>
+    <img src="https://swirl.hackclub.com/images/assets/other/stickers/orphmoji-yippee.png" alt="Orpheus Yippee!" style="background: none; width: 50px; margin-bottom: 2px;">
+</footer>
 
 </body>
+<script type="text/javascript" src="//unpkg.com/typewriter-effect/dist/core.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-  
+  // Airtable config
+  const AIRTABLE_API_KEY = 'patXhXBXWcybSLXx1.ca23aaa42c1c08390f682c9dac91ad3b512443895c4692814b9f3fe1458ee509';
+  const AIRTABLE_BASE_ID = 'appnIDvEOHZeznEys';
+  const AIRTABLE_TABLE_NAME = 'Data';
+
+  let allRecords = [];
+
+  // Fetch submissions from Airtable
+  async function fetchSubmissions() {
+    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${AIRTABLE_API_KEY}`
+        }
+      });
+      allRecords = response.data.records;
+      renderCards(allRecords);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      renderCards([]);
+    }
+  }
+
+  // Render cards
+  function renderCards(records) {
+    const submissionsDiv = document.getElementById('submissions');
+    submissionsDiv.innerHTML = '';
+    records.forEach(record => {
+      const { Name, Date, Demo, Status, Repo, Description, Image } = record.fields;
+      const imageUrl = (Image && Image[0]) ? Image[0].url : 'https://via.placeholder.com/400x160?text=No+Image';
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      card.innerHTML = `
+        <img src="${imageUrl}" alt="${Name || 'No Name'}">
+        <h2>${Name || 'No Name'}</h2>
+        <p style="color:#374151; margin-bottom:0.5rem;">${Description || ''}</p>
+        <p style="font-size:0.95rem; color:#6b7280;"><strong>Date:</strong> ${Date || 'N/A'}</p>
+        <p style="font-size:0.95rem;"><strong>Status:</strong> <span style="font-weight:600;">${Status || 'N/A'}</span></p>
+        <div class="links">
+          ${Demo ? `<a href="${Demo}" target="_blank">Demo</a>` : ''}
+          ${Repo ? `<a href="${Repo}" target="_blank" style="color:#059669;">Repo</a>` : ''}
+        </div>
+      `;
+      submissionsDiv.appendChild(card);
+    });
+  }
+
+  // Filter cards by status
+  document.getElementById('status').addEventListener('change', function() {
+    const selected = this.value;
+    if (selected === 'All') {
+      renderCards(allRecords);
+    } else {
+      const filtered = allRecords.filter(r => r.fields.Status === selected);
+      renderCards(filtered);
+    }
+  });
+
+  // Initialize
+  fetchSubmissions();
+
   var app = document.getElementById('app');
 
 var typewriter = new Typewriter(app, {
@@ -61,5 +205,5 @@ typewriter.typeString('Waffles')
     .pauseFor(2500)
     .deleteAll()
     .start();
-  </script>
+</script>
 </html>
