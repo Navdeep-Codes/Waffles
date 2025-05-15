@@ -130,29 +130,19 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   // Airtable config
-  const AIRTABLE_API_KEY = 'patXhXBXWcybSLXx1.ca23aaa42c1c08390f682c9dac91ad3b512443895c4692814b9f3fe1458ee509';
-  const AIRTABLE_BASE_ID = 'appnIDvEOHZeznEys';
-  const AIRTABLE_TABLE_NAME = 'Data';
-
   let allRecords = [];
 
   // Fetch submissions from Airtable
   async function fetchSubmissions() {
-    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
-    try {
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${AIRTABLE_API_KEY}`
-        }
-      });
-      allRecords = response.data.records;
-      renderCards(allRecords);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      renderCards([]);
-    }
+  try {
+    const response = await axios.get('/api/airtable');
+    allRecords = response.data.records;
+    renderCards(allRecords);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    renderCards([]);
   }
-
+}
   // Render cards
   function renderCards(records) {
     const submissionsDiv = document.getElementById('submissions');
