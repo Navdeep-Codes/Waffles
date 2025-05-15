@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/x-icon" href="https://hc-cdn.hel1.your-objectstorage.com/s/v3/1519dfc7925594ee21a03d3d9b306708930bed96_untitled_-_3_may_2025_00.26.29.jpg">
+  <link rel="icon" type="image/x-icon" href="Assets/Logo.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Waffles</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
     <div class="floating-waffle waffle-1">🧇</div>
@@ -23,8 +23,9 @@
         </ul>
     </nav>
     <br>
-    <img src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/1519dfc7925594ee21a03d3d9b306708930bed96_untitled_-_3_may_2025_00.26.29.jpg" alt="Waffle" />
+    <img src="Assets/Logo.jpg" alt="Waffle" />
     <h1>🧇 Waffles 🧇</h1>
+    <div id="app"></div>
     <br>
     <p class="tagline">YS: A Website with HTML, CSS and a little spread of JavaScript</p>
     <p class="tagline">WS: Get free waffles</p>
@@ -34,7 +35,9 @@
   <main>
     <section class="waffle-intro">
       <div class="button-container">
-        <button>🍯 Get your waffles</button>  <button>📢 Run a Club Meeting</button>
+        <button>Get your waffles</button> <button>Run a Club Meeting</button>
+        <br>
+        <button href="https://forms.hackclub.com/grub"><a>Get Started Guide!</a></button>
       </div>
       <h2>Who Can Participate?</h2>
       <h3>All Hack Clubbers globally under the age of 18 are eligible! Any US high school students over the age of 18 can join.</h3>
@@ -60,4 +63,23 @@
   </footer>
 
 </body>
+<script type="text/javascript" src="//unpkg.com/typewriter-effect/dist/core.js"></script>
+<script>
+  
+  var app = document.getElementById('app');
+
+var typewriter = new Typewriter(app, {
+    loop: true
+});
+
+typewriter.typeString('Hello World!')
+    .pauseFor(2500)
+    .deleteAll()
+    .typeString('Strings can be removed')
+    .pauseFor(2500)
+    .deleteChars(7)
+    .typeString('<strong>altered!</strong>')
+    .pauseFor(2500)
+    .start();
+  </script>
 </html>
