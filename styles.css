@@ -161,16 +161,6 @@ a {
   transition: color var(--transition-fast);
 }
 
-a:not(nav a)::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 1px;
-  bottom: -2px;
-  left: 0;
-  background-color: var(--primary-dark);
-  transition: width var(--transition-medium);
-}
 
 a:hover {
   color: var(--primary-dark);
@@ -178,13 +168,6 @@ a:hover {
 
 a:not(nav a):hover::after {
   width: 100%;
-}
-
-a:not(nav a):hover::before {
-  content: "🔗";
-  position: absolute;
-  left: -20px;
-  animation: wiggle 0.5s ease-in-out;
 }
 
 @keyframes wiggle {
