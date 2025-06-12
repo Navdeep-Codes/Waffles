@@ -134,7 +134,7 @@
   // Fetch submissions from Airtable
   async function fetchSubmissions() {
   try {
-    const response = await axios.get('/api/airtable.js');
+    const response = await axios.get('/api/airtable');
     allRecords = response.data.records;
     renderCards(allRecords);
   } catch (error) {
