@@ -1,0 +1,164 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="Assets/Logo.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Waffles | Gallery</title>
+  <link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Grid for cards */
+#submissions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  @media (max-width: 900px) {
+    #submissions { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    #submissions { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: #ffe0b2; 
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    padding: 1.5rem;
+    min-height: 26rem;
+    display: flex;
+    flex-direction: column;
+    color: #4e342e;
+    position: relative;
+  }
+  .card img {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .card h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+  .status-badge {
+    position: absolute;
+    top: 16rem;
+    left: 1.5rem;
+    background: #10b981;
+    color: #4e342e;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 1.5rem;
+    font-size: 1rem;
+  }
+  .card-title {
+    position: relative;
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+  .card-description {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .card-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+  }
+  .card-buttons a {
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+  }
+  .demo-button {
+    background: #ffb74d;
+    color: #4e342e;
+  }
+  .github-button {
+    background: #ffb74d;
+    color: #4e342e;
+  }
+    .status-filter-container {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .status-filter-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .status-filter-select {
+      background: #ffe0b2;
+      color: #4e342e;
+      border: 1px solid #6d4c41;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      width: 100%;
+      outline: none;
+      font-size: 1rem;
+    }
+  </style>
+  </head>
+<body>
+  <a href="https://hackclub.com/"><img
+    style="position: absolute; top: 0; left: 10px; border: 0; width: 180px; z-index: 999;"
+    src="https://assets.hackclub.com/flag-orpheus-top.svg" alt="Hack Club" /></a>
+    
+  <header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="requirements.html">Requirements</a></li>
+            <li><a href="get-started.html">Get Started</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+    </nav>
+    <br>
+    <img src="Assets/Logo.jpg" alt="Waffle" />
+    <h1><div id="app">Waffles</div></h1>
+    <br>
+    <p class="tagline">Check out created websites and track your submission!</p>
+    <br>
+  </header>
+
+  <main>
+    <div class="status-filter-container">
+      <div style="width: 12rem;">
+        <label for="status" class="status-filter-label">Status</label>
+        <select id="status" class="status-filter-select">
+          <option value="All">All</option>
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Rejected">Rejected</option>
+          <option value="Flagged">Flagged</option>
+        </select>
+      </div>
+    </div>
+    <div id="submissions">
+      
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <img src="https://swirl.hackclub.com/images/assets/other/stickers/orphmoji-yippee.png" alt="Orpheus Yippee!" style="background: none; width: 50px; margin-bottom: 2px;">
+    Made by Navdeep | Funded by Hack Club
+    <img src="https://swirl.hackclub.com/images/assets/other/stickers/orphmoji-yippee.png" alt="Orpheus Yippee!" style="background: none; width: 50px; margin-bottom: 2px;">
+</footer>
+
+</body>
+<script type="text/javascript" src="https://unpkg.com/typewriter-effect/dist/core.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="gallery.js"></script>
+</html>
