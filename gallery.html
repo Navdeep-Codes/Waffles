@@ -104,10 +104,10 @@
         <label for="status" class="status-filter-label">Status</label>
         <select id="status" class="status-filter-select">
           <option value="All">All</option>
-          <option value="Approved">Approved</option>
           <option value="Pending">Pending</option>
-          <option value="Needs Changes">Needs Changes</option>
+          <option value="Approved">Approved</option>
           <option value="Rejected">Rejected</option>
+          <option value="Flagged">Flagged</option>
         </select>
       </div>
     </div>
@@ -125,7 +125,7 @@
 </footer>
 
 </body>
-<script type="text/javascript" src="//unpkg.com/typewriter-effect/dist/core.js"></script>
+<script type="text/javascript" src="https://unpkg.com/typewriter-effect/dist/core.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   // Airtable config
@@ -134,7 +134,7 @@
   // Fetch submissions from Airtable
   async function fetchSubmissions() {
   try {
-    const response = await axios.get('/api/airtable');
+    const response = await axios.get('/api/airtable.js');
     allRecords = response.data.records;
     renderCards(allRecords);
   } catch (error) {
@@ -144,39 +144,43 @@
 }
   // Render cards
   function renderCards(records) {
-    const submissionsDiv = document.getElementById('submissions');
-    submissionsDiv.innerHTML = '';
-    records.forEach(record => {
-      const { Name, Date, Demo, Status, Repo, Description, Image } = record.fields;
-      const imageUrl = (Image && Image[0]) ? Image[0].url : 'https://via.placeholder.com/400x160?text=No+Image';
-      const card = document.createElement('div');
-      card.className = 'card';
+  const submissionsDiv = document.getElementById('submissions');
+  submissionsDiv.innerHTML = '';
+  records.forEach(record => {
+    const { 
+      "First Name": firstName, 
+      "Playable URL": playableUrl, 
+      "Review Status": reviewStatus, 
+      "Code URL": codeUrl, 
+      "Screenshot": screenshot 
+    } = record.fields;
+    const imageUrl = (screenshot && screenshot[0]) ? screenshot[0].url : 'https://via.placeholder.com/400x160?text=No+Image';
+    const card = document.createElement('div');
+    card.className = 'card';
 
-      card.innerHTML = `
-        <img src="${imageUrl}" alt="${Name || 'No Name'}">
-        <h2>${Name || 'No Name'}</h2>
-        <p style="color:#374151; margin-bottom:0.5rem;">${Description || ''}</p>
-        <p style="font-size:0.95rem; color:#6b7280;"><strong>Date:</strong> ${Date || 'N/A'}</p>
-        <p style="font-size:0.95rem;"><strong>Status:</strong> <span style="font-weight:600;">${Status || 'N/A'}</span></p>
-        <div class="links">
-          ${Demo ? `<a href="${Demo}" target="_blank">Demo</a>` : ''}
-          ${Repo ? `<a href="${Repo}" target="_blank" style="color:#059669;">Repo</a>` : ''}
-        </div>
-      `;
-      submissionsDiv.appendChild(card);
-    });
-  }
-
-  // Filter cards by status
-  document.getElementById('status').addEventListener('change', function() {
-    const selected = this.value;
-    if (selected === 'All') {
-      renderCards(allRecords);
-    } else {
-      const filtered = allRecords.filter(r => r.fields.Status === selected);
-      renderCards(filtered);
-    }
+    card.innerHTML = `
+      <img src="${imageUrl}" alt="${firstName || 'No Name'}">
+      <h2>${firstName || 'No Name'}</h2>
+      <p style="font-size:0.95rem;"><strong>Status:</strong> <span style="font-weight:600;">${reviewStatus || 'N/A'}</span></p>
+      <div class="links">
+        ${playableUrl ? `<a href="${playableUrl}" target="_blank">Demo</a>` : ''}
+        ${codeUrl ? `<a href="${codeUrl}" target="_blank" style="color:#059669;">Repo</a>` : ''}
+      </div>
+    `;
+    submissionsDiv.appendChild(card);
   });
+}
+
+// Filter cards by Review Status (not old Status)
+document.getElementById('status').addEventListener('change', function() {
+  const selected = this.value;
+  if (selected === 'All') {
+    renderCards(allRecords);
+  } else {
+    const filtered = allRecords.filter(r => r.fields["Review Status"] === selected);
+    renderCards(filtered);
+  }
+});
 
   // Initialize
   fetchSubmissions();
