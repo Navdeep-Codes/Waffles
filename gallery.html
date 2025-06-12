@@ -8,71 +8,90 @@
 <link rel="stylesheet" href="styles.css" />
   <style>
     /* Grid for cards */
-    #submissions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-    @media (max-width: 900px) {
-      #submissions { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 600px) {
-      #submissions { grid-template-columns: 1fr; }
-    }
-    .card {
-      background: #fff;
-      border-radius: 1.5rem;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
-      padding: 2rem;
-      min-height: 24rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      font-size: 1.125rem;
-    }
-    .card img {
-      width: 100%;
-      height: 10rem;
-      object-fit: cover;
-      border-radius: 0.5rem;
-      margin-bottom: 1rem;
-    }
-    .card h2 {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-    .card .links {
-      margin-top: 1rem;
-      display: flex;
-      gap: 1rem;
-    }
-    .card .links a {
-      text-decoration: underline;
-      color: #2563eb;
-    }
-    .status-filter-container {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .status-filter-label {
-      display: block;
-      margin-bottom: 0.5rem;
-      text-align: center;
-    }
-    .status-filter-select {
-      background: #991b1b;
-      color: #fff;
-      border: 1px solid #b91c1c;
-      padding: 0.75rem;
-      border-radius: 0.5rem;
-      width: 100%;
-      outline: none;
-      font-size: 1rem;
-    }
+     #submissions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  @media (max-width: 900px) {
+    #submissions { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    #submissions { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: #dc2626; /* Red background like in the image */
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    padding: 1.5rem;
+    min-height: 26rem;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    position: relative;
+  }
+  .card img {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .card h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+  .status-badge {
+    position: absolute;
+    top: 16rem;
+    left: 1.5rem;
+    background: #10b981;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 1.5rem;
+    font-size: 1rem;
+  }
+  .card-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+  .card-description {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .card-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+  }
+  .card-buttons a {
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+  }
+  .demo-button {
+    background: #fde047;
+    color: #000;
+  }
+  .github-button {
+    background: #000;
+    color: #fff;
+  }
+  .submission-date {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
     /* Footer styles remain unchanged */
   </style>
   </head>
@@ -144,32 +163,41 @@
 }
   // Render cards
   function renderCards(records) {
-  const submissionsDiv = document.getElementById('submissions');
-  submissionsDiv.innerHTML = '';
-  records.forEach(record => {
-    const { 
-      "First Name": firstName, 
-      "Playable URL": playableUrl, 
-      "Review Status": reviewStatus, 
-      "Code URL": codeUrl, 
-      "Screenshot": screenshot 
-    } = record.fields;
-    const imageUrl = (screenshot && screenshot[0]) ? screenshot[0].url : 'https://via.placeholder.com/400x160?text=No+Image';
-    const card = document.createElement('div');
-    card.className = 'card';
+    const submissionsDiv = document.getElementById('submissions');
+    submissionsDiv.innerHTML = '';
+    records.forEach(record => {
+      const { 
+        "First Name": firstName, 
+        "Playable URL": playableUrl, 
+        "Review Status": reviewStatus, 
+        "Code URL": codeUrl, 
+        "Screenshot": screenshot 
+      } = record.fields;
+      
+      const imageUrl = (screenshot && screenshot[0]) ? screenshot[0].url : 'https://via.placeholder.com/400x250?text=No+Image';
+      const card = document.createElement('div');
+      card.className = 'card';
 
-    card.innerHTML = `
-      <img src="${imageUrl}" alt="${firstName || 'No Name'}">
-      <h2>${firstName || 'No Name'}</h2>
-      <p style="font-size:0.95rem;"><strong>Status:</strong> <span style="font-weight:600;">${reviewStatus || 'N/A'}</span></p>
-      <div class="links">
-        ${playableUrl ? `<a href="${playableUrl}" target="_blank">Demo</a>` : ''}
-        ${codeUrl ? `<a href="${codeUrl}" target="_blank" style="color:#059669;">Repo</a>` : ''}
-      </div>
-    `;
-    submissionsDiv.appendChild(card);
-  });
-}
+      // Format status badge color based on status
+      let statusColor = "#10b981"; // Default green
+      if (reviewStatus === "Pending") statusColor = "#f59e0b";
+      if (reviewStatus === "Rejected") statusColor = "#ef4444";
+      if (reviewStatus === "Flagged") statusColor = "#6366f1";
+
+      card.innerHTML = `
+        <img src="${imageUrl}" alt="${firstName || 'No Name'}'s project">
+        <div class="status-badge" style="background-color: ${statusColor}">${reviewStatus || 'N/A'}</div>
+        <h2 class="card-title">Made by ${firstName || 'No Name'}</h2>
+        <p class="card-description">Waffles Project</p>
+        <div class="card-buttons">
+          ${playableUrl ? `<a href="${playableUrl}" target="_blank" class="demo-button"> <img src="./Assets/Link.png" alt="Link" style="background: none; width: 50px; margin-bottom: 2px;"> Demo</a>` : ''}
+          ${codeUrl ? `<a href="${codeUrl}" target="_blank" class="github-button"> <img src="./Assets/Code.png" alt="Code" style="background: none; width: 50px; margin-bottom: 2px;">  Github</a>` : ''}
+        </div>
+        <p class="submission-date">Submitted on ${new Date().toLocaleDateString()}</p>
+      `;
+      submissionsDiv.appendChild(card);
+    });
+  }
 
 // Filter cards by Review Status (not old Status)
 document.getElementById('status').addEventListener('change', function() {
