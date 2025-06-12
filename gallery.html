@@ -168,7 +168,12 @@
   // Fetch submissions from Airtable
   async function fetchSubmissions() {
   try {
-    const response = await axios.get('https://waffles-ten.vercel.app/api/airtable.js');
+    // Include the API key in the request headers
+    const response = await axios.get('https://waffles-ten.vercel.app/api/airtable', {
+      headers: {
+        'auth': process.env.API_KEY // This will be replaced with environment variable
+      }
+    });
     allRecords = response.data.records;
     renderCards(allRecords);
   } catch (error) {
