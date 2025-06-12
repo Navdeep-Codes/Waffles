@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="styles.css" />
   <style>
     /* Grid for cards */
-     #submissions {
+#submissions {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
@@ -87,11 +87,27 @@
     background: #000;
     color: #fff;
   }
-  .submission-date {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    opacity: 0.8;
-  }
+    .status-filter-container {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .status-filter-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .status-filter-select {
+      background: #991b1b;
+      color: #fff;
+      border: 1px solid #b91c1c;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      width: 100%;
+      outline: none;
+      font-size: 1rem;
+    }
     /* Footer styles remain unchanged */
   </style>
   </head>
@@ -186,12 +202,12 @@
 
       card.innerHTML = `
         <img src="${imageUrl}" alt="${firstName || 'No Name'}'s project">
-        <div class="status-badge" style="background-color: ${statusColor}">${reviewStatus || 'N/A'}</div>
+        <div class="status-badge" style="background-color: ${statusColor}">${reviewStatus || 'N/A'}</div> 
+        <br>
         <h2 class="card-title">Made by ${firstName || 'No Name'}</h2>
-        <p class="card-description">Waffles Project</p>
         <div class="card-buttons">
-          ${playableUrl ? `<a href="${playableUrl}" target="_blank" class="demo-button"> <img src="./Assets/Link.png" alt="Link" style="background: none; width: 50px; margin-bottom: 2px;"> Demo</a>` : ''}
-          ${codeUrl ? `<a href="${codeUrl}" target="_blank" class="github-button"> <img src="./Assets/Code.png" alt="Code" style="background: none; width: 50px; margin-bottom: 2px;">  Github</a>` : ''}
+          ${playableUrl ? `<a href="${playableUrl}" target="_blank" class="demo-button">📱 Demo</a>` : ''}
+          ${codeUrl ? `<a href="${codeUrl}" target="_blank" class="github-button">📂 Github</a>` : ''}
         </div>
         <p class="submission-date">Submitted on ${new Date().toLocaleDateString()}</p>
       `;
