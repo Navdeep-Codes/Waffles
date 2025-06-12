@@ -55,6 +55,7 @@
     font-size: 1rem;
   }
   .card-title {
+    position: absolute;
     font-size: 1.75rem;
     font-weight: bold;
     margin: 0.5rem 0;
@@ -147,9 +148,7 @@
       </div>
     </div>
     <div id="submissions">
-      <!-- Cards will be injected here -->
-    </div>
-    
+      
   </main>
 
   <!-- Footer -->
@@ -169,7 +168,7 @@
   // Fetch submissions from Airtable
   async function fetchSubmissions() {
   try {
-    const response = await axios.get('/api/airtable');
+    const response = await axios.get('https://waffles-ten.vercel.app/api/airtable.js');
     allRecords = response.data.records;
     renderCards(allRecords);
   } catch (error) {
@@ -203,6 +202,8 @@
       card.innerHTML = `
         <img src="${imageUrl}" alt="${firstName || 'No Name'}'s project">
         <div class="status-badge" style="background-color: ${statusColor}">${reviewStatus || 'N/A'}</div> 
+        <br>
+        <br>
         <br>
         <h2 class="card-title">Made by ${firstName || 'No Name'}</h2>
         <div class="card-buttons">
