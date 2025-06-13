@@ -51,7 +51,7 @@ export default async function handler(req, res) {
           "Screenshot": fields["Screenshot"] || null
         }
       };
-    });
+    }).filter(e=> e["Review Status"] !== "Flagged");
 
     return res.status(200).json({ records: filteredRecords });
     
