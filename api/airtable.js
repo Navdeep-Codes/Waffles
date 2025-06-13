@@ -45,7 +45,6 @@ export default async function handler(req, res) {
       return {
         id: record.id,
         fields: {
-          "First Name": fields["First Name"] || null,
           "Playable URL": fields["Playable URL"] || null,
           "Review Status": fields["Review Status"] || null,
           "Code URL": fields["Code URL"] || null,
