@@ -16,7 +16,6 @@ function renderCards(records) {
     submissionsDiv.innerHTML = '';
     records.forEach(record => {
       const { 
-        "First Name": firstName, 
         "Playable URL": playableUrl, 
         "Review Status": reviewStatus, 
         "Code URL": codeUrl, 
@@ -30,7 +29,6 @@ function renderCards(records) {
       let statusColor = "#10b981"; 
       if (reviewStatus === "Pending") statusColor = "#f59e0b";
       if (reviewStatus === "Rejected") statusColor = "#ef4444";
-      if (reviewStatus === "Flagged") statusColor = "#6366f1";
 
       card.innerHTML = `
         <img src="${imageUrl}" alt="${firstName || 'No Name'}'s project">
@@ -38,7 +36,6 @@ function renderCards(records) {
         <br>
         <br>
         <br>
-        <h2 class="card-title">Made by ${firstName || 'No Name'}</h2>
         <div class="card-buttons">
           ${playableUrl ? `<a href="${playableUrl}" target="_blank" class="demo-button">📱 Demo</a>` : ''}
           ${codeUrl ? `<a href="${codeUrl}" target="_blank" class="github-button">📂 Github</a>` : ''}
