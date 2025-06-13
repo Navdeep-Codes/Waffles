@@ -16,6 +16,7 @@ function renderCards(records) {
     submissionsDiv.innerHTML = '';
     records.forEach(record => {
       const { 
+        "First Name": firstName, 
         "Playable URL": playableUrl, 
         "Review Status": reviewStatus, 
         "Code URL": codeUrl, 
