@@ -81,7 +81,17 @@ body::after {
 .waffle-2 { top: 40%; right: 20%; animation-delay: 7s; }
 .waffle-3 { bottom: 30%; left: 30%; animation-delay: 3s; }
 .waffle-4 { top: 15%; right: 25%; animation-delay: 10s; }
-
+@media (prefers-reduced-motion: reduce) {
+  .waffle-1 { top: 25%; left: 15%; animation-delay: 3s; }
+.waffle-2 { top: 40%; right: 20%; animation-delay: 10s; }
+.waffle-3 { bottom: 30%; left: 30%; animation-delay: 6s; }
+.waffle-4 { top: 15%; right: 25%; animation-delay: 13s; }
+:root {
+   --transition-fast: 1.2s ease;
+  --transition-medium: 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-slow: 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+}
 @keyframes float {
   0% { transform: translate(0, 0) rotate(0deg); }
   25% { transform: translate(50px, 25px) rotate(90deg); }
@@ -152,6 +162,7 @@ p {
   margin-top: 0.25rem;
   letter-spacing: 0.5px;
   text-align: center;
+  margin-bottom: 0;
 }
 
 a {
@@ -442,7 +453,7 @@ section:hover::after {
 }
 
 button {
-  margin: 1.5rem 0.8rem;
+  margin: 0.5rem 0.8rem;
   padding: 0.9rem 1.8rem;
   background-color: var(--primary);
   border: none;
