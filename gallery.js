@@ -41,7 +41,7 @@ function renderCards(records) {
     if (reviewStatus === "Re-Review") statusColor = "#D36507";
 
     card.innerHTML = `
-        <img src="${imageUrl}" alt="${firstName || "No Name"}'s project">
+        <img src="${imageUrl}" alt="No Image :(">
         <div class="status-badge" style="background-color: ${statusColor}">${
       reviewStatus || "N/A"
     }</div> 
